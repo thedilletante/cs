@@ -6,7 +6,7 @@ pub struct TwoStackQueue<T> {
     for_pop: StackWithConstantMax<T>,
 }
 
-impl <T: Ord + Copy + std::default::Default> TwoStackQueue <T> {
+impl<T: Ord + Copy + std::default::Default> TwoStackQueue<T> {
     pub fn new() -> Self {
         Self {
             for_push: Default::default(),
@@ -36,7 +36,6 @@ impl <T: Ord + Copy + std::default::Default> TwoStackQueue <T> {
             (None, Some(pop_value)) => Some(pop_value),
             (None, None) => None,
         }
-
     }
 }
 
@@ -63,5 +62,4 @@ mod tests {
         assert_eq!(queue.max(), None);
         assert_eq!(queue.pop(), None);
     }
-
 }

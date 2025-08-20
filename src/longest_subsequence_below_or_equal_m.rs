@@ -1,4 +1,4 @@
-pub type Input <'a, T> = &'a [T];
+pub type Input<'a, T> = &'a [T];
 #[derive(Default, Debug, PartialEq)]
 pub struct Output {
     pub left: usize,
@@ -6,8 +6,9 @@ pub struct Output {
 }
 
 pub fn find<T>(input: Input<T>, target: T) -> Option<Output>
-    where T: Copy + std::ops::Add + std::ops::AddAssign + std::ops::SubAssign + std::default::Default,
-          <T as std::ops::Add>::Output: PartialOrd<T>
+where
+    T: Copy + std::ops::Add + std::ops::AddAssign + std::ops::SubAssign + std::default::Default,
+    <T as std::ops::Add>::Output: PartialOrd<T>,
 {
     let mut right = 0;
     let mut sum = T::default();
@@ -37,7 +38,6 @@ pub fn find<T>(input: Input<T>, target: T) -> Option<Output>
 
     result
 }
-
 
 #[cfg(test)]
 mod tests {

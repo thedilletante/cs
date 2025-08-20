@@ -41,7 +41,16 @@ mod tests {
         assert_eq!(find(&input), expected);
 
         let input = vec![1, 7, 9, 3, 10, 4, 7, 5];
-        let expected = vec![None, Some(0), Some(1), Some(0), Some(3), Some(3), Some(5), Some(5)];
+        let expected = vec![
+            None,
+            Some(0),
+            Some(1),
+            Some(0),
+            Some(3),
+            Some(3),
+            Some(5),
+            Some(5),
+        ];
         assert_eq!(find(&input), expected);
     }
 }

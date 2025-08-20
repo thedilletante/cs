@@ -3,7 +3,7 @@ pub struct StackWithConstantMax<T> {
     stack_with_max: Vec<(T, T)>,
 }
 
-impl <T: Ord + Copy + std::default::Default> StackWithConstantMax<T> {
+impl<T: Ord + Copy + std::default::Default> StackWithConstantMax<T> {
     pub fn new() -> Self {
         StackWithConstantMax {
             stack_with_max: Default::default(),
@@ -11,7 +11,11 @@ impl <T: Ord + Copy + std::default::Default> StackWithConstantMax<T> {
     }
 
     pub fn push(&mut self, value: T) {
-        let new_max = self.stack_with_max.last().map(|&(_, existing_max)| existing_max.max(value)).unwrap_or(value);
+        let new_max = self
+            .stack_with_max
+            .last()
+            .map(|&(_, existing_max)| existing_max.max(value))
+            .unwrap_or(value);
         self.stack_with_max.push((value, new_max));
     }
 

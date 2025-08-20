@@ -1,8 +1,4 @@
-
-
-
 pub type InPlaceInput<'a, T> = &'a mut [T];
-
 
 pub fn selection_sort<T: Ord>(input: InPlaceInput<T>) {
     for i in 0..input.len() {

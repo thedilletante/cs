@@ -1,6 +1,6 @@
 use std::collections::VecDeque;
 
-pub type Input <'a, T> = &'a [T];
+pub type Input<'a, T> = &'a [T];
 pub type Output = Vec<usize>;
 
 // Complexity:
@@ -18,7 +18,11 @@ pub fn find<T: Ord>(input: Input<T>) -> Option<Output> {
     for i in 1..n {
         let mut index_of_max = None;
         for j in 0..i {
-            if input[i] > input[j] && index_of_max.map(|m| lengths_of_subsequence[j] > lengths_of_subsequence[m]).unwrap_or(true) {
+            if input[i] > input[j]
+                && index_of_max
+                    .map(|m| lengths_of_subsequence[j] > lengths_of_subsequence[m])
+                    .unwrap_or(true)
+            {
                 index_of_max = Some(j);
             }
         }
@@ -28,7 +32,11 @@ pub fn find<T: Ord>(input: Input<T>) -> Option<Output> {
         }
     }
 
-    let Some((index, max)) = lengths_of_subsequence.iter().enumerate().max_by_key(|&(_, value)| value) else {
+    let Some((index, max)) = lengths_of_subsequence
+        .iter()
+        .enumerate()
+        .max_by_key(|&(_, value)| value)
+    else {
         return None;
     };
 
@@ -65,7 +73,11 @@ pub fn find_lexicographically_smallest<T: Ord>(input: Input<T>) -> Option<Output
     for i in (0..n).rev() {
         let mut index_of_max = None;
         for j in (i + 1)..n {
-            if input[i] < input[j] && index_of_max.map(|m| lengths_of_subsequence[j] > lengths_of_subsequence[m]).unwrap_or(true) {
+            if input[i] < input[j]
+                && index_of_max
+                    .map(|m| lengths_of_subsequence[j] > lengths_of_subsequence[m])
+                    .unwrap_or(true)
+            {
                 index_of_max = Some(j);
             }
         }
@@ -75,7 +87,11 @@ pub fn find_lexicographically_smallest<T: Ord>(input: Input<T>) -> Option<Output
         }
     }
 
-    let Some((index, max)) = lengths_of_subsequence.iter().enumerate().max_by_key(|&(_, value)| value) else {
+    let Some((index, max)) = lengths_of_subsequence
+        .iter()
+        .enumerate()
+        .max_by_key(|&(_, value)| value)
+    else {
         return None;
     };
 
@@ -95,7 +111,6 @@ pub fn find_lexicographically_smallest<T: Ord>(input: Input<T>) -> Option<Output
 
     Some(result.into_iter().collect())
 }
-
 
 #[cfg(test)]
 mod tests {
