@@ -1,14 +1,16 @@
+use crate::stack_with_constant_max::StackWithConstantMax;
+
 #[derive(Default)]
 pub struct TwoStackQueue<T> {
-    for_push: Vec<T>,
-    for_pop: Vec<T>,
+    for_push: StackWithConstantMax<T>,
+    for_pop: StackWithConstantMax<T>,
 }
 
-impl <T> TwoStackQueue <T> {
+impl <T: Ord + Copy + std::default::Default> TwoStackQueue <T> {
     pub fn new() -> Self {
         Self {
-            for_push: Vec::new(),
-            for_pop: Vec::new(),
+            for_push: Default::default(),
+            for_pop: Default::default(),
         }
     }
 
@@ -24,6 +26,18 @@ impl <T> TwoStackQueue <T> {
         }
         self.for_pop.pop()
     }
+
+    pub fn max(&self) -> Option<T> {
+        let push_max = self.for_push.max();
+        let pop_max = self.for_pop.max();
+        match (push_max, pop_max) {
+            (Some(push_value), Some(pop_value)) => Some(push_value.max(pop_value)),
+            (Some(push_value), None) => Some(push_value),
+            (None, Some(pop_value)) => Some(pop_value),
+            (None, None) => None,
+        }
+
+    }
 }
 
 #[cfg(test)]
@@ -35,13 +49,18 @@ mod tests {
         let mut queue = TwoStackQueue::new();
         queue.push(1);
         queue.push(2);
+        assert_eq!(queue.max(), Some(2));
         queue.push(3);
+        assert_eq!(queue.max(), Some(3));
 
         assert_eq!(queue.pop(), Some(1));
         assert_eq!(queue.pop(), Some(2));
         queue.push(4);
+        assert_eq!(queue.max(), Some(4));
         assert_eq!(queue.pop(), Some(3));
+        assert_eq!(queue.max(), Some(4));
         assert_eq!(queue.pop(), Some(4));
+        assert_eq!(queue.max(), None);
         assert_eq!(queue.pop(), None);
     }
 

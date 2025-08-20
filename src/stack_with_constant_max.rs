@@ -3,10 +3,10 @@ pub struct StackWithConstantMax<T> {
     stack_with_max: Vec<(T, T)>,
 }
 
-impl <T: Ord + Copy> StackWithConstantMax<T> {
+impl <T: Ord + Copy + std::default::Default> StackWithConstantMax<T> {
     pub fn new() -> Self {
         StackWithConstantMax {
-            stack_with_max: Vec::new(),
+            stack_with_max: Default::default(),
         }
     }
 
