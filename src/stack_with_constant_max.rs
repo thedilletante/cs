@@ -1,34 +1,30 @@
 #[derive(Default)]
 pub struct StackWithConstantMax<T> {
-    stack: Vec<T>,
-    max: Vec<T>,
+    stack_with_max: Vec<(T, T)>,
 }
 
 impl <T: Ord + Copy> StackWithConstantMax<T> {
     pub fn new() -> Self {
         StackWithConstantMax {
-            stack: Vec::new(),
-            max: Vec::new(),
+            stack_with_max: Vec::new(),
         }
     }
 
     pub fn push(&mut self, value: T) {
-        self.stack.push(value);
-        let new_max = self.max.last().map(|&existing_max| existing_max.max(value)).unwrap_or(value);
-        self.max.push(new_max);
+        let new_max = self.stack_with_max.last().map(|&(_, existing_max)| existing_max.max(value)).unwrap_or(value);
+        self.stack_with_max.push((value, new_max));
     }
 
     pub fn pop(&mut self) -> Option<T> {
-        self.max.pop();
-        self.stack.pop()
+        self.stack_with_max.pop().map(|(value, _)| value)
     }
 
     pub fn max(&self) -> Option<T> {
-        self.max.last().copied()
+        self.stack_with_max.last().map(|&(_, max)| max)
     }
 
     pub fn is_empty(&self) -> bool {
-        self.stack.is_empty()
+        self.stack_with_max.is_empty()
     }
 }
 
