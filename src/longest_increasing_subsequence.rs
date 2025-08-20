@@ -32,13 +32,10 @@ pub fn find<T: Ord>(input: Input<T>) -> Option<Output> {
         }
     }
 
-    let Some((index, max)) = lengths_of_subsequence
+    let (index, max) = lengths_of_subsequence
         .iter()
         .enumerate()
-        .max_by_key(|&(_, value)| value)
-    else {
-        return None;
-    };
+        .max_by_key(|&(_, value)| value)?;
 
     if *max == 1 {
         return None; // No increasing subsequence found
@@ -87,13 +84,10 @@ pub fn find_lexicographically_smallest<T: Ord>(input: Input<T>) -> Option<Output
         }
     }
 
-    let Some((index, max)) = lengths_of_subsequence
+    let (index, max) = lengths_of_subsequence
         .iter()
         .enumerate()
-        .max_by_key(|&(_, value)| value)
-    else {
-        return None;
-    };
+        .max_by_key(|&(_, value)| value)?;
 
     if *max == 1 {
         return None; // No increasing subsequence found
