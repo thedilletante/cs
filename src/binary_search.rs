@@ -1,4 +1,4 @@
-pub type Input <'a, T> = &'a [T];
+pub type Input<'a, T> = &'a [T];
 pub type Output = Option<usize>;
 
 pub fn lower_bound<T: Ord>(input: Input<T>, target: T) -> Output {
@@ -24,7 +24,6 @@ pub fn lower_bound<T: Ord>(input: Input<T>, target: T) -> Output {
     }
     Some(left)
 }
-
 
 #[cfg(test)]
 mod tests {
