@@ -1,5 +1,6 @@
 pub mod binary_search;
 pub mod left_nearest_number;
+pub mod levenshtein_distance;
 pub mod longest_increasing_subsequence;
 pub mod longest_subsequence_below_or_equal_m;
 pub mod sort;
